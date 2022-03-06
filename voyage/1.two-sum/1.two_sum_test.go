@@ -12,9 +12,9 @@ func TestTwoSum(t *testing.T) {
 		{[]int{2, 7, 11, 15}, 18, []int{1, 2}},
 		{[]int{2, 7, 11, 15}, 17, []int{0, 3}},
 	}
-	for _, test := range cases {
-		if actual := TwoSum(test.nums, test.target); !equal(actual, test.expected) {
-			t.Errorf("TwoSum(%v, %v) == %v, expected %v", test.nums, test.target, actual, test.expected)
+	for _, ca := range cases {
+		if actual := TwoSum(ca.nums, ca.target); !equal(actual, ca.expected) {
+			t.Errorf("TwoSum(%v, %v) == %v, expected %v", ca.nums, ca.target, actual, ca.expected)
 		}
 	}
 }
