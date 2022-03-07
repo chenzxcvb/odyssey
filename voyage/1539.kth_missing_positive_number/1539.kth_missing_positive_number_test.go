@@ -10,9 +10,9 @@ func TestFindKthPositive(t *testing.T) {
 		k        int
 		expected int
 	}{
-		{[]int{7, 11}, 2, 5},
-		{[]int{1, 2, 3, 4}, 2, 6},
-		{[]int{2, 3, 4, 7, 11}, 5, 9},
+		{[]int{3, 4, 5}, 1, 1},
+		{[]int{3, 4, 5, 9}, 3, 6},
+		{[]int{1, 2, 3}, 2, 5},
 	}
 	for _, ca := range cases {
 		actual := FindKthPositive(ca.arr, ca.k)

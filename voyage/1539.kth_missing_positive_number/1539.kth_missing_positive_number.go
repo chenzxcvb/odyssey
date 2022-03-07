@@ -1,6 +1,12 @@
 package voyage
 
 /**
+NOTE:
+first try time complexity O(n), a solution found on youtube by "Fisher Coder"
+another more efficient solution O(logn) is leverage binary tree search. TODO
+*/
+
+/**
 Array -- EASY
 https://leetcode.com/problems/kth-missing-positive-number/
 
@@ -29,20 +35,38 @@ Constraints:
 1 <= k <= 1000
 arr[i] < arr[j] for 1 <= i < j <= arr.length
 */
+
 func FindKthPositive(arr []int, k int) int {
-	missed := make([]int, 0)
-	set := NewSetFromList(arr)
+	// case 1: arr: [3, 4, 5], k: 1, result:1
+	// case 2: arr: [3, 4, 5, 9], k: 3, result: 6
+	// case 3: arr: [1, 2, 3], k: 2, result: 5
+	missed := 0
 	for i, v := range arr {
-		idx := i + 1
-		for v < arr[idx+1] {
-			if !set.Contains(idx) {
-				missed = append(missed, v)
+		if i == 0 {
+			missed += v - 1
+			if missed >= k { // case 1
+				return k
 			}
-			v++
+		} else {
+			missed += arr[i] - arr[i-1] - 1
+			if missed >= k { // case 2
+				missed -= arr[i] - arr[i-1] - 1
+				result := arr[i-1]
+				for missed < k {
+					missed++
+					result++
+				}
+				return result
+			}
 		}
 	}
 
-	return missed[k-1]
+	result := arr[len(arr)-1]
+	for missed < k { // case3
+		missed++
+		result++
+	}
+	return result
 }
 
 type IntSet map[int]int
